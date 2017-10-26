@@ -2,6 +2,7 @@ name: RedVsBlue
 main: com.senither.redvsblue.RedVsBlue
 version: 0.1
 description: A simple and fastpaced minigame.
+load: startup
 
 author: Senither
 authros: [Senither]
