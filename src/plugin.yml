@@ -1,0 +1,9 @@
+name: RedVsBlue
+main: com.senither.redvsblue.RedVsBlue
+version: 0.1
+description: A simple and fastpaced minigame.
+
+author: Senither
+authros: [Senither]
+
+depend: [LilyPad-Minigame-Hook]
