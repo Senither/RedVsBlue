@@ -37,4 +37,8 @@ public class Team {
         players.remove(player.getName());
         team.removeEntry(player.getName());
     }
+
+    public List<String> getPlayers() {
+        return players;
+    }
 }

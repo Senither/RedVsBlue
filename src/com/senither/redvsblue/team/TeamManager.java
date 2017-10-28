@@ -24,6 +24,15 @@ public class TeamManager {
         }
     }
 
+    public static void addPlayer(Player player) {
+        // TODO: If the gave have already started, add the player to the spectator team.
+        removePlayer(player);
+
+        if (teams.get(TeamType.BLUE).getPlayers().size() > teams.get(TeamType.RED).getPlayers().size())
+            addPlayer(TeamType.RED, player);
+        else addPlayer(TeamType.BLUE, player);
+    }
+
     public static void addPlayer(TeamType type, Player player) {
         for (TeamType teamType : TeamType.values()) {
             if (teamType.name().equals(type.name())) {

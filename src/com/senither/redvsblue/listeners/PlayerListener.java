@@ -2,7 +2,6 @@ package com.senither.redvsblue.listeners;
 
 import com.senither.redvsblue.RedVsBlue;
 import com.senither.redvsblue.team.TeamManager;
-import com.senither.redvsblue.team.TeamType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -18,7 +17,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        TeamManager.addPlayer(TeamType.BLUE, event.getPlayer());
+        TeamManager.addPlayer(event.getPlayer());
     }
 
     @EventHandler
