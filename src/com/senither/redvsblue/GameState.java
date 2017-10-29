@@ -3,7 +3,6 @@ package com.senither.redvsblue;
 import com.senither.redvsblue.contracts.states.GameStateHandler;
 import com.senither.redvsblue.states.ChangingMapHandler;
 import com.senither.redvsblue.states.PlayingHandler;
-import com.senither.redvsblue.states.StartingHandler;
 import com.senither.redvsblue.states.WaitingForPlayersHandler;
 
 import java.lang.reflect.InvocationTargetException;
@@ -15,7 +14,6 @@ import java.util.logging.Logger;
 public enum GameState {
 
     WAITING_FOR_PLAYERS(1, 30, true, WaitingForPlayersHandler.class),
-    STARTING(2, 3, true, StartingHandler.class),
     PLAYING(3, PlayingHandler.class),
     CHANGING_MAP(4, ChangingMapHandler.class);
 

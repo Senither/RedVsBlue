@@ -35,19 +35,8 @@ public class TeamManager {
         else addPlayer(TeamType.BLUE, player);
     }
 
-    public void addPlayer(Player player) {
-        removePlayer(player);
-
-        switch (plugin.getGameState()) {
-            case WAITING_FOR_PLAYERS:
-            case CHANGING_MAP:
-            case PLAYING:
-                addPlayer(TeamType.SPECTATOR, player);
-                break;
-
-            case STARTING:
-                addBalancePlayer(player);
-        }
+    public void addPlayerToSpectator(Player player) {
+        addPlayer(TeamType.SPECTATOR, player);
     }
 
     public void addPlayer(TeamType type, Player player) {
@@ -69,6 +58,10 @@ public class TeamManager {
                 teams.get(type).removePlayer(player);
             }
         }
+    }
+
+    public Team getTeam(TeamType type) {
+        return teams.get(type);
     }
 
     public Scoreboard getScoreboard() {

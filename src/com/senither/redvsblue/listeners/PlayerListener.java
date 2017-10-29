@@ -16,7 +16,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        plugin.getTeamManager().addPlayer(event.getPlayer());
+        plugin.getTeamManager().addPlayerToSpectator(event.getPlayer());
     }
 
     @EventHandler
