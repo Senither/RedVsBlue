@@ -1,6 +1,6 @@
 package com.senither.redvsblue.team;
 
-import org.bukkit.Bukkit;
+import com.senither.redvsblue.RedVsBlue;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -11,11 +11,14 @@ import java.util.Map;
 
 public class TeamManager {
 
+    private final RedVsBlue plugin;
     private final Map<TeamType, Team> teams = new HashMap<>();
     private final Scoreboard scoreboard;
 
-    public TeamManager() {
-        scoreboard = Bukkit.getServer().getScoreboardManager().getMainScoreboard();
+    public TeamManager(RedVsBlue plugin) {
+        this.plugin = plugin;
+
+        scoreboard = plugin.getServer().getScoreboardManager().getMainScoreboard();
         Objective objective = scoreboard.registerNewObjective("test", "dummy");
         objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
 
@@ -24,13 +27,27 @@ public class TeamManager {
         }
     }
 
-    public void addPlayer(Player player) {
-        // TODO: If the gave have already started, add the player to the spectator team.
+    public void addBalancePlayer(Player player) {
         removePlayer(player);
 
         if (teams.get(TeamType.BLUE).getPlayers().size() > teams.get(TeamType.RED).getPlayers().size())
             addPlayer(TeamType.RED, player);
         else addPlayer(TeamType.BLUE, player);
+    }
+
+    public void addPlayer(Player player) {
+        removePlayer(player);
+
+        switch (plugin.getGameState()) {
+            case WAITING_FOR_PLAYERS:
+            case CHANGING_MAP:
+            case PLAYING:
+                addPlayer(TeamType.SPECTATOR, player);
+                break;
+
+            case STARTING:
+                addBalancePlayer(player);
+        }
     }
 
     public void addPlayer(TeamType type, Player player) {

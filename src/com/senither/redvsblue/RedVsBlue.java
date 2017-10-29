@@ -13,7 +13,7 @@ public class RedVsBlue extends GamePlugin {
 
     @Override
     public void onReady() {
-        teamManager = new TeamManager();
+        teamManager = new TeamManager(this);
         gameState = GameState.WAITING_FOR_PLAYERS;
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
