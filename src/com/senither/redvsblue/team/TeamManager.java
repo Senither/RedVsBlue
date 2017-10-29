@@ -11,10 +11,10 @@ import java.util.Map;
 
 public class TeamManager {
 
-    private static final Map<TeamType, Team> teams = new HashMap<>();
-    private static final Scoreboard scoreboard;
+    private final Map<TeamType, Team> teams = new HashMap<>();
+    private final Scoreboard scoreboard;
 
-    static {
+    public TeamManager() {
         scoreboard = Bukkit.getServer().getScoreboardManager().getMainScoreboard();
         Objective objective = scoreboard.registerNewObjective("test", "dummy");
         objective.setDisplaySlot(DisplaySlot.PLAYER_LIST);
@@ -24,7 +24,7 @@ public class TeamManager {
         }
     }
 
-    public static void addPlayer(Player player) {
+    public void addPlayer(Player player) {
         // TODO: If the gave have already started, add the player to the spectator team.
         removePlayer(player);
 
@@ -33,7 +33,7 @@ public class TeamManager {
         else addPlayer(TeamType.BLUE, player);
     }
 
-    public static void addPlayer(TeamType type, Player player) {
+    public void addPlayer(TeamType type, Player player) {
         for (TeamType teamType : TeamType.values()) {
             if (teamType.name().equals(type.name())) {
                 teams.get(type).addPlayer(player);
@@ -46,7 +46,7 @@ public class TeamManager {
         }
     }
 
-    public static void removePlayer(Player player) {
+    public void removePlayer(Player player) {
         for (TeamType type : TeamType.values()) {
             if (teams.get(type).hasPlayer(player)) {
                 teams.get(type).removePlayer(player);
@@ -54,7 +54,7 @@ public class TeamManager {
         }
     }
 
-    public static Scoreboard getScoreboard() {
+    public Scoreboard getScoreboard() {
         return scoreboard;
     }
 }
