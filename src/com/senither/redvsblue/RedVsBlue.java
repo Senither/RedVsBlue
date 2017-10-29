@@ -9,12 +9,16 @@ import org.bukkit.scoreboard.Team;
 public class RedVsBlue extends GamePlugin {
 
     private TeamManager teamManager;
+    private GameState gameState;
 
     @Override
     public void onReady() {
         teamManager = new TeamManager();
+        gameState = GameState.WAITING_FOR_PLAYERS;
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
+
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new GameLoop(this), 20L, 1L);
     }
 
     @Override
@@ -29,5 +33,13 @@ public class RedVsBlue extends GamePlugin {
 
     public TeamManager getTeamManager() {
         return teamManager;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 }
